@@ -353,12 +353,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === Parallax on scroll (subtle) ===
     const heroContent = document.querySelector('.hero-content');
+    const heroScroll = document.querySelector('.hero-scroll');
     if (heroContent) {
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
             if (scrollY < window.innerHeight) {
+                const opacity = Math.max(0, 1 - (scrollY / (window.innerHeight * 0.6)));
                 heroContent.style.transform = `translateY(${scrollY * 0.3}px)`;
-                heroContent.style.opacity = 1 - (scrollY / window.innerHeight);
+                heroContent.style.opacity = opacity;
+                if (heroScroll) {
+                    heroScroll.style.opacity = opacity;
+                    heroScroll.style.transform = `translateX(-50%) translateY(${scrollY * 0.15}px)`;
+                }
             }
         }, { passive: true });
     }
