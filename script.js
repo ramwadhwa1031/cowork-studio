@@ -54,6 +54,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.body.style.overflow = '';
             });
         });
+
+        // Handle click on the ::after pseudo-element ("Book a Tour" CTA)
+        navLinks.addEventListener('click', (e) => {
+            // Check if click was in the ::after area (below the last nav link)
+            const lastLink = navLinks.querySelector('li:last-child');
+            if (lastLink) {
+                const lastLinkRect = lastLink.getBoundingClientRect();
+                if (e.clientY > lastLinkRect.bottom + 10) {
+                    // Navigate to book section
+                    navToggle.classList.remove('active');
+                    navLinks.classList.remove('active');
+                    document.body.style.overflow = '';
+                    const bookSection = document.getElementById('book');
+                    if (bookSection) {
+                        bookSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    } else {
+                        // If on another page, go to contact page
+                        window.location.href = 'contact.html#book';
+                    }
+                }
+            }
+        });
+
+        // Close mobile nav when clicking outside (on the overlay area)
+        document.addEventListener('click', (e) => {
+            if (navLinks.classList.contains('active') && 
+                !navLinks.contains(e.target) && 
+                !navToggle.contains(e.target)) {
+                navToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
     }
 
     // === Hero Slideshow ===

@@ -2301,15 +2301,19 @@ ul { list-style: none; }
         width: 80%;
         max-width: 400px;
         height: 100vh;
-        background: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(20px);
+        height: 100dvh;
+        background: rgba(255, 255, 255, 0.99);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
         flex-direction: column;
-        align-items: flex-start;
-        padding: 100px 32px 32px;
-        gap: 4px;
+        align-items: stretch;
+        padding: 100px 24px 32px;
+        gap: 2px;
         transition: right var(--transition-medium);
         border-left: 1px solid var(--glass-border);
-        box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+        box-shadow: -10px 0 40px rgba(0,0,0,0.12);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .nav-links.active {
@@ -2319,9 +2323,12 @@ ul { list-style: none; }
     .nav-link,
     .navbar:not(.scrolled):not(.navbar-solid) .nav-link {
         width: 100%;
-        padding: 14px 20px;
-        font-size: 1rem;
+        padding: 16px 20px;
+        font-size: 1.02rem;
+        font-weight: 500;
         color: var(--text-secondary);
+        border-radius: var(--radius-md);
+        transition: all var(--transition-fast);
     }
     
     .nav-link:hover,
@@ -2332,8 +2339,26 @@ ul { list-style: none; }
         background: rgba(220, 38, 38, 0.06);
     }
     
+    /* Show CTA as last item inside mobile nav */
     .nav-cta {
         display: none;
+    }
+    
+    /* Mobile nav CTA button injected via CSS */
+    .nav-links::after {
+        content: 'Book a Tour';
+        display: block;
+        margin-top: 16px;
+        padding: 16px 28px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: white;
+        background: var(--accent-gradient);
+        border-radius: var(--radius-full);
+        text-align: center;
+        letter-spacing: 0.3px;
+        box-shadow: 0 4px 16px rgba(220, 38, 38, 0.25);
+        cursor: pointer;
     }
     
     .nav-toggle {
@@ -2459,11 +2484,48 @@ ul { list-style: none; }
     }
     
     .contact-social-links {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .social-link-card {
+        flex: 1 1 calc(50% - 6px);
+        min-width: 0;
+        padding: 12px 14px;
+    }
+    
+    .social-link-card span {
+        font-size: 0.78rem;
     }
     
     .form-row {
         grid-template-columns: 1fr;
+    }
+    
+    /* Contact card — remove translateX hover on mobile (not touch-friendly) */
+    .contact-card:hover {
+        transform: none;
+    }
+    
+    /* Make contact card responsive */
+    .contact-card {
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .contact-card-icon {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .contact-card-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+    
+    /* Map section mobile */
+    .map-section iframe {
+        height: 350px;
     }
     
     .map-overlay-info {
@@ -2504,11 +2566,31 @@ ul { list-style: none; }
     }
     
     .page-hero {
-        padding: 160px 0 80px;
+        padding: 140px 0 60px;
+    }
+    
+    .page-hero-short {
+        padding: 130px 0 50px;
+    }
+    
+    .page-hero-title {
+        font-size: clamp(1.8rem, 7vw, 2.8rem);
+    }
+    
+    .page-hero-subtitle {
+        font-size: 0.95rem;
     }
     
     .contact-form-card {
-        padding: 28px;
+        padding: 24px 20px;
+    }
+    
+    .form-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .contact-section.section {
+        padding: 60px 0;
     }
 }
 
@@ -2525,5 +2607,65 @@ ul { list-style: none; }
     .mosaic-large,
     .mosaic-wide {
         grid-column: span 1;
+    }
+    
+    /* Contact cards stack vertically on very small screens */
+    .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 18px;
+    }
+    
+    .contact-card-action {
+        align-self: flex-start;
+    }
+    
+    .contact-social-links {
+        flex-direction: column;
+    }
+    
+    .social-link-card {
+        flex: 1 1 100%;
+    }
+    
+    /* Contact form tighter on small phones */
+    .contact-form-card {
+        padding: 20px 16px;
+    }
+    
+    .input-wrap {
+        padding: 12px 14px;
+    }
+    
+    /* Map card on small screens */
+    .map-overlay-info {
+        padding: 16px;
+    }
+    
+    .map-section iframe {
+        height: 280px;
+    }
+    
+    /* Smaller nav logo on small phones */
+    .nav-logo-wide {
+        height: 36px;
+    }
+    
+    .navbar.scrolled .nav-logo-wide,
+    .navbar-solid .nav-logo-wide {
+        height: 32px;
+    }
+    
+    /* Mobile nav links tighter */
+    .nav-links {
+        width: 85%;
+        padding: 90px 20px 24px;
+    }
+    
+    .nav-link,
+    .navbar:not(.scrolled):not(.navbar-solid) .nav-link {
+        padding: 14px 16px;
+        font-size: 0.95rem;
     }
 }
