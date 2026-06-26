@@ -2507,10 +2507,11 @@ ul { list-style: none; }
         transform: none;
     }
     
-    /* Make contact card responsive */
+    /* Make contact cards stack action below content on mobile */
     .contact-card {
+        flex-wrap: wrap;
         padding: 20px;
-        gap: 16px;
+        gap: 14px;
     }
     
     .contact-card-icon {
@@ -2521,6 +2522,25 @@ ul { list-style: none; }
     .contact-card-icon svg {
         width: 22px;
         height: 22px;
+    }
+    
+    .contact-card-content {
+        flex: 1;
+        min-width: 0;
+    }
+    
+    .contact-card-content p {
+        font-size: 0.85rem;
+        word-break: break-word;
+    }
+    
+    .contact-card-action {
+        width: 100%;
+        justify-content: flex-start;
+        padding-top: 8px;
+        border-top: 1px solid var(--glass-border);
+        margin-top: 0;
+        align-self: auto;
     }
     
     /* Map section mobile */
