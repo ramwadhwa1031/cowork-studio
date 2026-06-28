@@ -1816,8 +1816,8 @@ ul { list-style: none; }
     align-items: flex-end;
     justify-content: space-between;
     padding: 24px;
-    opacity: 0;
-    transition: opacity var(--transition-fast);
+    opacity: 1;
+    transition: background var(--transition-fast);
 }
 
 .gallery-item:hover .gallery-item-overlay {
