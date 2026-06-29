@@ -368,4 +368,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, { passive: true });
     }
+
+    // === Lazy-load Footer Map Iframe ===
+    const mapIframes = document.querySelectorAll('.footer-map iframe[data-src]');
+    if (mapIframes.length > 0) {
+        const mapObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const iframe = entry.target;
+                    iframe.src = iframe.dataset.src;
+                    iframe.removeAttribute('data-src');
+                    observer.unobserve(iframe);
+                }
+            });
+        }, { rootMargin: '200px' });
+        mapIframes.forEach(iframe => mapObserver.observe(iframe));
+    }
 });
